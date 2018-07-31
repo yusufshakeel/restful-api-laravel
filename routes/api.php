@@ -2,6 +2,8 @@
 
 use Illuminate\Http\Request;
 
+use App\Participant;
+
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -13,6 +15,20 @@ use Illuminate\Http\Request;
 |
 */
 
-Route::middleware('auth:api')->get('/user', function (Request $request) {
-    return $request->user();
-});
+//Route::middleware('auth:api')->get('/user', function (Request $request) {
+//    return $request->user();
+//});
+
+Route::get('participants', 'ParticipantController@index');
+
+Route::get('participants/{id}', 'ParticipantController@participantById');
+
+Route::get('participants/{id}/{passcode}', 'ParticipantController@participantCompleteData');
+
+Route::get('participants/page/{page}/{limit}', 'ParticipantController@fetchByPage');
+
+Route::delete('participants/{id}/{passcode}', 'ParticipantController@deleteParticipant');
+
+Route::put('participants/{id}/{passcode}', 'ParticipantController@updateParticipant');
+
+Route::post('participants', 'ParticipantController@createParticipant');
